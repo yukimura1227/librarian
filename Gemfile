@@ -100,3 +100,4 @@ end
 
 gem 'devise'
 gem 'omniauth'
+gem 'omniauth-google-oauth2'
