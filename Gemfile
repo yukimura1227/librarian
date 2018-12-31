@@ -97,3 +97,5 @@ group :test do
   gem 'timecop'
   gem 'codecov', require: false, group: :test
 end
+
+gem 'devise'
