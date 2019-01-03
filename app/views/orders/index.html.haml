@@ -14,7 +14,7 @@
     - @orders.each do |order|
       %tr
         %td= order.title
-        %td= order.order_time
+        %td= l order.order_time, format: :short
         %td= order.state_i18n
         %td= order.user.name
         %td.uk-text-truncate= order.url
