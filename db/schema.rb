@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_025956) do
   create_table "orders", force: :cascade do |t|
     t.string "title"
     t.datetime "order_time"
-    t.integer "state"
+    t.integer "state", default: 0
     t.text "url"
     t.text "origin_html"
     t.datetime "created_at", null: false
