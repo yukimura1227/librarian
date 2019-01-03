@@ -1,16 +1,14 @@
 %h1 Listing orders
 
-%table
+%table.uk-table.uk-table-divider.uk-table-striped.uk-table-hover.uk-table-small
   %thead
     %tr
-      %th Title
-      %th Order time
-      %th State
-      %th Order by
-      %th Url
-      %th
-      %th
-      %th
+      %th.uk-width-expand Title
+      %th.uk-width-shrink Order time
+      %th.uk-width-shrink State
+      %th.uk-width-shrink Order by
+      %th.uk-width-shrink Url
+      %th.uk-width-shrink
 
   %tbody
     - @orders.each do |order|
@@ -19,10 +17,11 @@
         %td= order.order_time
         %td= order.state
         %td= order.user.name
-        %td= order.url
-        %td= link_to 'Show', order
-        %td= link_to 'Edit', edit_order_path(order)
-        %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.uk-text-truncate= order.url
+        %td
+          = link_to 'Show', order
+          = link_to 'Edit', edit_order_path(order)
+          = link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
