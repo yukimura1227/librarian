@@ -5,7 +5,7 @@
   = @order.title
 %p
   %b Order time:
-  = @order.order_time
+  = l @order.order_time, format: :short
 %p
   %b State:
   = @order.state
