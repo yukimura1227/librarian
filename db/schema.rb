@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_025956) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
     t.string "title"
     t.datetime "order_time"
     t.integer "state", default: 0

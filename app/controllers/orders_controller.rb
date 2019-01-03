@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.order_time = Time.zone.now
+    @order.user = current_user
 
     respond_to do |format|
       if @order.save

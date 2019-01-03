@@ -6,6 +6,7 @@
       %th Title
       %th Order time
       %th State
+      %th Order by
       %th Url
       %th
       %th
@@ -17,6 +18,7 @@
         %td= order.title
         %td= order.order_time
         %td= order.state
+        %td= order.user.name
         %td= order.url
         %td= link_to 'Show', order
         %td= link_to 'Edit', edit_order_path(order)
