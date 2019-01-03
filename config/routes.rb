@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :books, only: %i(index edit update)
-  resources :orders
+  resources :orders do
+    member do
+      post :purchase
+    end
+  end
   root to: 'top#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do

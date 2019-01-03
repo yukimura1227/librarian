@@ -1,6 +1,6 @@
 # for order controller
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :purchase]
 
   # GET /orders
   # GET /orders.json
@@ -61,6 +61,14 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def purchase
+    if @order.purchase
+      redirect_to orders_path , notice: 'Order was successfully purchased.'
+    else
+      redirect_to orders_path , alert: 'Error!! Order was not purchased.'
     end
   end
 
