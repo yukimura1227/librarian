@@ -32,6 +32,12 @@
             %li= link_to "Link 2", "/path2"
             %li= link_to "Link 3", "/path3"
             %li= link_to "Link 3", "/path3"
+          %ul.nav.navbar-nav.navbar-right
+            %li.nav-item
+              - unless user_signed_in?
+                = link_to "Login", user_google_oauth2_omniauth_authorize_path
+              - else
+                = link_to "Logout", destroy_user_session_path, method: :delete
 
     .container
       .row
