@@ -1,11 +1,11 @@
 %h1 Listing books
 
-%table
+%table.uk-table.uk-table-divider.uk-table-striped.uk-table-hover.uk-table-small
   %thead
     %tr
-      %th Title
-      %th Location
-      %th
+      %th.uk-width-expand  Title
+      %th.uk-width-shrink  Location
+      %th.uk-width-shrink 
 
   %tbody
     - @books.each do |book|
