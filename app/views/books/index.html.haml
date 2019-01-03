@@ -1,0 +1,19 @@
+%h1 Listing books
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Location
+      %th Order
+      %th
+      %th
+      %th
+
+  %tbody
+    - @books.each do |book|
+      %tr
+        %td= book.title
+        %td= book.location
+        %td= book.order_id
+
