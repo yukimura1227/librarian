@@ -9,5 +9,10 @@ class OrderDecorator < Draper::Decorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+  def allow_edit?(user)
+    return false if user.blank?
+    return false unless order_purchase_waiting?
 
+    user_id == user.id
+  end
 end

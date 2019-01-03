@@ -19,8 +19,9 @@
         %td= order.user.name
         %td
           = link_to 'Show', order
-          = link_to 'Edit', edit_order_path(order)
-          = link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+          - if order.allow_edit?(current_user)
+            = link_to 'Edit', edit_order_path(order)
+            = link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
