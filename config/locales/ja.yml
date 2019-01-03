@@ -1,0 +1,6 @@
+ja:
+  enums:
+    order:
+      state:
+        order_purchase_waiting: 購入待ち
+        order_purchased: 購入済み
