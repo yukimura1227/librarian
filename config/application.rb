@@ -27,5 +27,7 @@ module Librarian
     # the framework and any gems in your application.
     I18n.config.available_locales = :ja
     I18n.default_locale = :ja
+    config.active_record.default_timezone = :local
+    config.time_zone = 'Tokyo'
   end
 end
