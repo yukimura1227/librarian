@@ -7,17 +7,16 @@
       %th.uk-width-shrink Order time
       %th.uk-width-shrink State
       %th.uk-width-shrink Order by
-      %th.uk-width-shrink Url
       %th.uk-width-shrink
 
   %tbody
     - @orders.each do |order|
       %tr
-        %td= order.title
+        %td.uk-table-link
+          = link_to order.title, order.url
         %td= l order.order_time, format: :short
         %td= order.state_i18n
         %td= order.user.name
-        %td.uk-text-truncate= order.url
         %td
           = link_to 'Show', order
           = link_to 'Edit', edit_order_path(order)
