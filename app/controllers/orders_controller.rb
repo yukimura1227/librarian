@@ -66,9 +66,9 @@ class OrdersController < ApplicationController
 
   def purchase
     if @order.purchase
-      redirect_to orders_path , notice: 'Order was successfully purchased.'
+      redirect_to orders_path, notice: 'Order was successfully purchased.'
     else
-      redirect_to orders_path , alert: 'Error!! Order was not purchased.'
+      redirect_to orders_path, alert: 'Error!! Order was not purchased.'
     end
   end
 
