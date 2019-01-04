@@ -32,7 +32,7 @@ class BooksController < ApplicationController
       current_user.rental_operations.create(book: @book)
       redirect_to books_path, notice: "#{@book.title}を借りました。"
     else
-      redirect_to books_path, alert: "#{@book.title}を借りるのに失敗しました。"
+      redirect_to books_path, alert: "「#{@book.title}」を借りるのに失敗しました。"
     end
   end
 
@@ -42,7 +42,7 @@ class BooksController < ApplicationController
       current_user.return_operations.create(book: @book)
       redirect_to books_path, notice: "#{@book.title}を返しました。"
     else
-      redirect_to books_path, alert: "#{@book.title}を返すのに失敗しました。"
+      redirect_to books_path, alert: "「#{@book.title}」を返すのに失敗しました。"
     end
   end
 
