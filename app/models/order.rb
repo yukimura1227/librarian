@@ -4,10 +4,23 @@ class Order < ApplicationRecord
   has_one :book
   enum state: { order_purchase_waiting: 0, order_purchased: 10 }
 
+  attr_reader :parsed_title, :parsed_img_path
+
   def purchase
     create_book(
       title: title
     )
     order_purchased!
+  end
+
+  def extract_amazon_product_info!(target_url = nil)
+    target_url = target_url.presence || url
+    agent = Mechanize.new
+    page = agent.get(target_url)
+    @elements = page.search('#dp-container')
+    @parsed_title = @elements.search('#productTitle').inner_text
+    img_wrap = @elements.search('#img-canvas')
+    @parsed_img_path = img_wrap.search('img').first[:src]
+    @elements
   end
 end
