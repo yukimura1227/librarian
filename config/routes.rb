@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :books, only: %i(index edit update) do
     member do
       post :rental
+      post :return
     end
   end
   resources :orders do

@@ -1,6 +1,6 @@
 # controller for books
 class BooksController < ApplicationController
-  before_action :set_book, only: [:edit, :update, :rental]
+  before_action :set_book, only: [:edit, :update, :rental, :return]
 
   # GET /books
   # GET /books.json
@@ -30,6 +30,12 @@ class BooksController < ApplicationController
     @book.user = current_user
     @book.save
     redirect_to books_path, notice: "#{@book.title}を借りました。"
+  end
+
+  def return
+    @book.user = nil
+    @book.save
+    redirect_to books_path, notice: "#{@book.title}を返しました。"
   end
 
   private

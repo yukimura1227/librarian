@@ -6,4 +6,8 @@ class Book < ApplicationRecord
   def rentaled?
     user.present?
   end
+
+  def rentaled_by?(user)
+    user.present? && self.user == user
+  end
 end
