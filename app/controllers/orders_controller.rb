@@ -64,6 +64,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def extract_amazon_product_info
+    @order = Order.new(order_params)
+    @order.extract_amazon_product_info!
+  end
+
   def purchase
     if @order.purchase
       redirect_to orders_path, notice: 'Order was successfully purchased.'

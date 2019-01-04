@@ -17,10 +17,10 @@ class Order < ApplicationRecord
     target_url = target_url.presence || url
     agent = Mechanize.new
     page = agent.get(target_url)
-    @elements = page.search('#dp-container')
-    @parsed_title = @elements.search('#productTitle').inner_text
-    img_wrap = @elements.search('#img-canvas')
+    elements = page.search('#dp-container')
+    @parsed_title = elements.search('#productTitle').inner_text
+    img_wrap = elements.search('#img-canvas')
     @parsed_img_path = img_wrap.search('img').first[:src]
-    @elements
+    elements
   end
 end
