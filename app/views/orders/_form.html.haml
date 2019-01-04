@@ -10,6 +10,7 @@
     = f.label :url, class: 'uk-form-label'
     .uk-form-controls
       = f.text_field :url, class: 'uk-input js-input-url'
+      = f.hidden_field :origin_html, class: 'js-input-origin-html'
     .uk-button.uk-button-default.uk-link-reset.js-extract-amazon-product-info{ data: { 'api-url': extract_amazon_product_info_orders_path}}
       Amazonから情報を取得する
     :coffee
@@ -33,6 +34,7 @@
           ).done((data, textStatus, jqXHR) ->
             $('.js-input-title').val(data.title)
             $('.js-input-title').addClass('uk-disabled')
+            $('.js-input-origin-html').val(data.origin_html)
             return
           ).fail((jqXHR, textStatus, errorThrown) ->
             alert 'Error!!'
