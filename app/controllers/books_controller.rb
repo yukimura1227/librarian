@@ -28,16 +28,22 @@ class BooksController < ApplicationController
 
   def rental
     @book.user = current_user
-    @book.save
-    current_user.rental_operations.create(book: @book)
-    redirect_to books_path, notice: "#{@book.title}を借りました。"
+    if @book.save
+      current_user.rental_operations.create(book: @book)
+      redirect_to books_path, notice: "#{@book.title}を借りました。"
+    else
+      redirect_to books_path, alert: "#{@book.title}を借りるのに失敗しました。"
+    end
   end
 
   def return
     @book.user = nil
-    @book.save
-    current_user.return_operations.create(book: @book)
-    redirect_to books_path, notice: "#{@book.title}を返しました。"
+    if @book.save
+      current_user.return_operations.create(book: @book)
+      redirect_to books_path, notice: "#{@book.title}を返しました。"
+    else
+      redirect_to books_path, alert: "#{@book.title}を返すのに失敗しました。"
+    end
   end
 
   private
