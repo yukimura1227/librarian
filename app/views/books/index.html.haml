@@ -5,12 +5,16 @@
     %tr
       %th.uk-width-expand  Title
       %th.uk-width-shrink  Location
-      %th.uk-width-shrink 
+      %th.uk-width-expand Image
+      %th.uk-width-shrink
 
   %tbody
     - @books.each do |book|
       %tr
         %td= book.title
         %td= book.location
+        %td
+          - if book.order.image_path
+            = image_tag book.order.image_path, size: '55x70'
         %td= link_to 'Edit', edit_book_path(book)
 
