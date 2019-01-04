@@ -1,10 +1,11 @@
+# controller for books
 class BooksController < ApplicationController
-  before_action :set_book, only: [:edit, :update]
+  before_action :set_book, only: [:edit, :update, :rental]
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all.includes(:order)
+    @books = Book.all.includes(:order).includes(:user)
   end
 
   # GET /books/1/edit
@@ -23,6 +24,12 @@ class BooksController < ApplicationController
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def rental
+    @book.user = current_user
+    @book.save
+    redirect_to books_path, notice: "#{@book.title}を借りました。"
   end
 
   private

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :omniauthable, omniauth_providers: %i(google_oauth2)
 
+  has_many :books
+
   def self.find_for_google(auth)
     user = User.find_by(email: auth.info.email)
 

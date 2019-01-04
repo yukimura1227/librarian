@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_110727) do
     t.string "title"
     t.text "location"
     t.integer "order_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

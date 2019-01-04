@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :books, only: %i(index edit update)
+  resources :books, only: %i(index edit update) do
+    member do
+      post :rental
+    end
+  end
   resources :orders do
     member do
       post :purchase

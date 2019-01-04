@@ -6,6 +6,7 @@
       %th.uk-width-expand  Title
       %th.uk-width-shrink  Location
       %th.uk-width-expand Image
+      %th.uk-width-shrink  rentaled by
       %th.uk-width-shrink
 
   %tbody
@@ -16,5 +17,10 @@
         %td
           - if book.order.image_path
             = image_tag book.order.image_path, size: '55x70'
-        %td= link_to '編集', edit_book_path(book)
+        %td
+          - if book.user.present?
+            = book.user.email
+        %td
+          = link_to '編集', edit_book_path(book)
+          = link_to '借りる', rental_book_path(book), method: :post
 
