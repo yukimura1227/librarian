@@ -12,27 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2019_01_03_110727) do
 
-  create_table "blogs", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.text "location"
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.text "content"
-    t.integer "blog_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["blog_id"], name: "index_comments_on_blog_id"
   end
 
   create_table "orders", force: :cascade do |t|
