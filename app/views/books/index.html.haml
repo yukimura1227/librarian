@@ -1,4 +1,4 @@
-%h1 Listing books
+%h1 書籍一覧
 
 %table.uk-table.uk-table-divider.uk-table-striped.uk-table-hover.uk-table-small
   %thead
@@ -16,5 +16,5 @@
         %td
           - if book.order.image_path
             = image_tag book.order.image_path, size: '55x70'
-        %td= link_to 'Edit', edit_book_path(book)
+        %td= link_to '編集', edit_book_path(book)
 
