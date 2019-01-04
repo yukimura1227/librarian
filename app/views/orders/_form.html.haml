@@ -1,4 +1,4 @@
-= form_for @order do |f|
+= form_for @order, html: {class: 'uk-form-stacked'} do |f|
   - if @order.errors.any?
     #error_explanation
       %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
@@ -6,11 +6,53 @@
         - @order.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :url
-    = f.text_field :url
-  .actions
-    = f.submit 'Save'
+  .uk-margin
+    = f.label :url, class: 'uk-form-label'
+    .uk-form-controls
+      = f.text_field :url, class: 'uk-input js-input-url'
+      = f.hidden_field :origin_html, class: 'js-input-origin-html'
+    .uk-form-controls
+      .js-product-image
+    .uk-button.uk-button-default.uk-link-reset.js-extract-amazon-product-info{ data: { 'api-url': extract_amazon_product_info_orders_path}}
+      Amazonから情報を取得する
+    :coffee
+      $ () ->
+        $('.js-extract-amazon-product-info').on 'click', ->
+          api_url = $(this).data('api-url')
+          amazon_url = $('.js-input-url').val()
+          if amazon_url  == ''
+            alert 'please input url!!'
+            return
+
+          self = $(this)
+          self.addClass("uk-disabled")
+
+          $.ajax(
+            url: api_url
+            type: 'get'
+            data: {
+              "order[url]": $('.js-input-url').val()
+            }
+          ).done((data, textStatus, jqXHR) ->
+            $('.js-input-title').val(data.title)
+            $('.js-input-title').addClass('uk-disabled')
+            $('.js-input-origin-html').val(data.origin_html)
+            $('.js-product-image').html("<img src='" + data.image_path + "'/>")
+            $('.js-input-image-path').val(data.image_path)
+            return
+          ).fail((jqXHR, textStatus, errorThrown) ->
+            alert 'Error!!'
+            return
+          ).always(() ->
+            self.removeClass("uk-disabled")
+          )
+  .uk-margin
+    = f.label :title, class: 'uk-form-label'
+    .uk-form-controls
+      = f.text_field :title, class: 'uk-input js-input-title'
+  .uk-margin
+    = f.label :image_path, class: 'uk-form-label'
+    .uk-form-controls
+      = f.text_field :image_path, class: 'uk-input js-input-image-path'
+  .uk-margin
+    = f.submit 'Save', class: 'uk-button uk-button-primary'

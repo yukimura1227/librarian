@@ -64,6 +64,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def extract_amazon_product_info
+    @order = Order.new(order_params)
+    @order.extract_amazon_product_info!
+  end
+
   def purchase
     if @order.purchase
       redirect_to books_path, notice: 'Order was successfully purchased.'
@@ -80,6 +85,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:title, :order_time, :state, :url)
+    params.require(:order).permit(:title, :order_time, :state, :url, :origin_html, :image_path)
   end
 end

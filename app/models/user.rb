@@ -14,9 +14,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  private
-
-  def create_user_by_google(oauth_data)
+  def self.create_user_by_google(oauth_data)
     User.create(
       email:    oauth_data.info.email,
       name:     oauth_data.info.name,
@@ -26,4 +24,5 @@ class User < ActiveRecord::Base
       meta:     oauth_data.to_yaml
     )
   end
+  private_class_method :create_user_by_google
 end

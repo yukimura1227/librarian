@@ -100,5 +100,6 @@ end
 
 gem 'devise'
 gem 'enum_help'
+gem 'mechanize'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'

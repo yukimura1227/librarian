@@ -7,6 +7,7 @@
       %th.uk-width-shrink Order time
       %th.uk-width-shrink State
       %th.uk-width-shrink Order by
+      %th.uk-width-expand Image
       %th.uk-width-shrink
 
   %tbody
@@ -18,9 +19,12 @@
         %td= order.state_i18n
         %td= order.user.name
         %td
+          - if order.image_path.present?
+            = image_tag order.image_path, size: '55x70'
+        %td
           = link_to 'Show', order
           - if order.allow_edit?(current_user)
-            = link_to '購入', purchase_order_path(order), method: :post, data: { confirm: '購入済みですか？' }
+            = link_to '購入済にする', purchase_order_path(order), method: :post, data: { confirm: '購入済ですか？' }
             = link_to 'Edit', edit_order_path(order)
             = link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
 

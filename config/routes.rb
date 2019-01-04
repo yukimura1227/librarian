@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     member do
       post :purchase
     end
+    collection do
+      get :extract_amazon_product_info
+    end
   end
   root to: 'top#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

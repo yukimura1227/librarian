@@ -7,6 +7,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.integer :state, default: 0
       t.text :url
       t.text :origin_html
+      t.text :image_path
 
       t.timestamps
     end

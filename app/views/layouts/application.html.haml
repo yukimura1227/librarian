@@ -23,24 +23,21 @@
 
 
   %body
-    .navbar.navbar-default.navbar-static-top
-      .container
-        %button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand(href="#") Librarian
-        .navbar-collapse.collapse.navbar-responsive-collapse
-          %ul.nav.navbar-nav
-            %li= link_to "書籍一覧", books_path
-            %li= link_to "注文一覧", orders_path
-            %li= link_to "書籍注文", new_order_path
-          %ul.nav.navbar-nav.navbar-right
-            %li.nav-item
+    .uk-navbar-container{ 'uk-navbar': '' }
+      .uk-navbar-left
+        %a.uk-navbar-item.uk-logo(href="#") Librarian
+        %ul.uk-navbar-nav
+          %li= link_to "書籍一覧", books_path
+          %li= link_to "注文一覧", orders_path
+          %li= link_to "書籍注文", new_order_path
+      .uk-navbar-right
+        %ul.uk-navbar-nav
+          %li
+            %button.uk-button.uk-button-default
               - unless user_signed_in?
-                = link_to "Login", user_google_oauth2_omniauth_authorize_path
+                = link_to "Login", user_google_oauth2_omniauth_authorize_path, class: 'uk-link-reset'
               - else
-                = link_to "Logout", destroy_user_session_path, method: :delete
+                = link_to "Logout", destroy_user_session_path, method: :delete, class: 'uk-link-reset'
 
     .container
       .row
