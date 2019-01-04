@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: %i(google_oauth2)
 
   has_many :books
+  has_many :rental_operations, class_name: 'Operation::Rental'
+  has_many :return_operations, class_name: 'Operation::Return'
 
   def self.find_for_google(auth)
     user = User.find_by(email: auth.info.email)
