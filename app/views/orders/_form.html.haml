@@ -1,4 +1,4 @@
-= form_for @order do |f|
+= form_for @order, html: {class: 'uk-form-stacked'} do |f|
   - if @order.errors.any?
     #error_explanation
       %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
@@ -6,11 +6,13 @@
         - @order.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :url
-    = f.text_field :url
-  .actions
-    = f.submit 'Save'
+  .uk-margin
+    = f.label :title, class: 'uk-form-label'
+    .uk-form-controls
+      = f.text_field :title, class: 'uk-input'
+  .uk-margin
+    = f.label :url, class: 'uk-form-label'
+    .uk-form-controls
+    = f.text_field :url, class: 'uk-input'
+  .uk-margin
+    = f.submit 'Save', class: 'uk-button uk-button-primary'
