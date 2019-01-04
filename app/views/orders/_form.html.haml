@@ -7,10 +7,6 @@
           %li= message
 
   .uk-margin
-    = f.label :title, class: 'uk-form-label'
-    .uk-form-controls
-      = f.text_field :title, class: 'uk-input js-input-title'
-  .uk-margin
     = f.label :url, class: 'uk-form-label'
     .uk-form-controls
       = f.text_field :url, class: 'uk-input js-input-url'
@@ -44,5 +40,9 @@
           ).always(() ->
             self.removeClass("uk-disabled")
           )
+  .uk-margin
+    = f.label :title, class: 'uk-form-label'
+    .uk-form-controls
+      = f.text_field :title, class: 'uk-input js-input-title'
   .uk-margin
     = f.submit 'Save', class: 'uk-button uk-button-primary'
