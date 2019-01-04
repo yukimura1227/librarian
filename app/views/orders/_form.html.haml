@@ -26,7 +26,7 @@
 
           self = $(this)
           self.addClass("uk-disabled")
-
+          $('.js-product-image').html('<div uk-spinner></div>')
           $.ajax(
             url: api_url
             type: 'get'
