@@ -85,6 +85,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:title, :order_time, :state, :url, :origin_html)
+    params.require(:order).permit(:title, :order_time, :state, :url, :origin_html, :image_path)
   end
 end

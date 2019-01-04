@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_110727) do
     t.integer "state", default: 0
     t.text "url"
     t.text "origin_html"
+    t.text "image_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

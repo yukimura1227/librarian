@@ -11,6 +11,8 @@
     .uk-form-controls
       = f.text_field :url, class: 'uk-input js-input-url'
       = f.hidden_field :origin_html, class: 'js-input-origin-html'
+    .uk-form-controls
+      .js-product-image
     .uk-button.uk-button-default.uk-link-reset.js-extract-amazon-product-info{ data: { 'api-url': extract_amazon_product_info_orders_path}}
       Amazonから情報を取得する
     :coffee
@@ -35,6 +37,8 @@
             $('.js-input-title').val(data.title)
             $('.js-input-title').addClass('uk-disabled')
             $('.js-input-origin-html').val(data.origin_html)
+            $('.js-product-image').html("<img src='" + data.image_path + "'/>")
+            $('.js-input-image-path').val(data.image_path)
             return
           ).fail((jqXHR, textStatus, errorThrown) ->
             alert 'Error!!'
@@ -46,5 +50,9 @@
     = f.label :title, class: 'uk-form-label'
     .uk-form-controls
       = f.text_field :title, class: 'uk-input js-input-title'
+  .uk-margin
+    = f.label :image_path, class: 'uk-form-label'
+    .uk-form-controls
+      = f.text_field :image_path, class: 'uk-input js-input-image-path'
   .uk-margin
     = f.submit 'Save', class: 'uk-button uk-button-primary'
