@@ -25,7 +25,7 @@ module Librarian
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    I18n.config.available_locales = :ja
+    I18n.config.available_locales = [:ja, :en]
     I18n.default_locale = :ja
     config.active_record.default_timezone = :local
     config.time_zone = 'Tokyo'
