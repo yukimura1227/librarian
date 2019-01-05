@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/yukimura1227/librarian.svg?branch=master)](https://travis-ci.org/yukimura1227/librarian)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/93ebeb3317a4dce2fd84/maintainability)](https://codeclimate.com/github/yukimura1227/librarian/maintainability)
+
 # Libralian
 amazonでの書籍購入依頼と、購入後の書籍の貸借管理をするためのWebアプリです。
 
