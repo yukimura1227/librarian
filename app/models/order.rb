@@ -7,6 +7,9 @@ class Order < ApplicationRecord
   attr_reader :parsed_title, :parsed_image_path, :parsed_html
 
   after_create :notify_slack
+
+  validates :title, presence: true
+
   def purchase
     create_book(
       title: title
