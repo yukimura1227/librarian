@@ -3,12 +3,12 @@
 %table.uk-table.uk-table-divider.uk-table-striped.uk-table-hover.uk-table-small
   %thead
     %tr
-      %th.uk-width-medium Title
-      %th.uk-width-shrink Order time
-      %th.uk-width-shrink State
-      %th.uk-width-shrink Order by
-      %th.uk-width-expand Image
-      %th.uk-width-shrink
+      %th Title
+      %th Order time
+      %th State
+      %th Order by
+      %th Image
+      %th
 
   %tbody
     - @orders.each do |order|
@@ -24,7 +24,10 @@
         %td
           = link_to '詳細', order
           - if order.allow_edit?(current_user)
+            %br/
             = link_to '購入済にする', purchase_order_path(order), method: :post, data: { confirm: '購入済ですか？' }
+            %br/
             = link_to '注文情報修正', edit_order_path(order)
+            %br/
             = link_to '注文取消', order, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }
 
