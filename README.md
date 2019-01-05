@@ -16,4 +16,8 @@ bin/rake db:migrate
 GOOGLE_APP_ID
 # google secret key for oauth
 GOOGLE_APP_SECRET
+# webhook url for slack
+SLACK_WEBHOOK_URL
+# attention name on slack
+SLACK_NOTIFY_TO
 ```

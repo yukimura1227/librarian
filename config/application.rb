@@ -29,5 +29,8 @@ module Librarian
     I18n.default_locale = :ja
     config.active_record.default_timezone = :local
     config.time_zone = 'Tokyo'
+
+    config.slack_webhook_url = ENV['SLACK_WEBHOOK_URL']
+    config.slack_notify_to = ENV['SLACK_NOTIFY_TO']
   end
 end

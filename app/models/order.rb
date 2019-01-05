@@ -6,6 +6,7 @@ class Order < ApplicationRecord
 
   attr_reader :parsed_title, :parsed_image_path, :parsed_html
 
+  after_create :notify_slack
   def purchase
     create_book(
       title: title
@@ -23,5 +24,21 @@ class Order < ApplicationRecord
     @parsed_image_path = img_wrap.search('img').first[:src]
     @parsed_html = elements.to_html
     elements
+  end
+
+  private
+
+  def notify_slack
+    return if Rails.application.config.slack_webhook_url.blank?
+    notifier = Slack::Notifier.new(Rails.application.config.slack_webhook_url)
+    message = <<~"MESSAGE"
+      @#{notify_to} 「#{title}」の注文依頼がありました。
+      #{url}
+    MESSAGE
+    notifier.ping(message, parse: "full")
+  end
+
+  def notify_to
+    Rails.application.config.slack_notify_to || 'here'
   end
 end
