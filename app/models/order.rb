@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   after_create :notify_slack
 
   validates :title, presence: true
+  validates :url, presence: true
 
   def purchase
     create_book(
