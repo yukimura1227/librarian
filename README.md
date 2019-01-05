@@ -1,24 +1,19 @@
-# README
+# Libralian
+amazonでの書籍購入依頼と、購入後の書籍の貸借管理をするためのWebアプリです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Setup
+bundle install
+yarn
+bin/rake db:migrate
 
-* Ruby version
 
-* System dependencies
+## Usage
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Required environment variables
+```
+# google client_id for oauth
+GOOGLE_APP_ID
+# google secret key for oauth
+GOOGLE_APP_SECRET
+```
