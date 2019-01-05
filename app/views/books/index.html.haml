@@ -3,11 +3,11 @@
 %table.uk-table.uk-table-divider.uk-table-striped.uk-table-hover.uk-table-small
   %thead
     %tr
-      %th.uk-width-expand  Title
-      %th.uk-width-shrink  Location
-      %th.uk-width-expand Image
-      %th.uk-width-shrink  rentaled by
-      %th.uk-width-shrink
+      %th  Title
+      %th  Location
+      %th Image
+      %th  rentaled by
+      %th
 
   %tbody
     - @books.each do |book|
@@ -22,6 +22,7 @@
             = book.user.email
         %td
           = link_to '編集', edit_book_path(book)
+          .uk-margin-small
           - if book.rentaled_by?(current_user)
             = link_to '返す', return_book_path(book), method: :post
           - else
