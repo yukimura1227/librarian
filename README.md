@@ -33,7 +33,8 @@ LOGIN_ALLOW_DOMAIN_CSV
 ```
 # heroku first setup
 heroku login
-heroku git:remote -a libralian
+heroku create [any application name]
+heroku git:remote -a [specific application name]
 heroku buildpacks:add --index 1 heroku/nodejs # for yarn
 
 # 下記コマンドで、heroku/nodejsとheroku/rubyがこの順で表示されればOK
