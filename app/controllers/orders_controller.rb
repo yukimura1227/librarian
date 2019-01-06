@@ -5,7 +5,8 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all.decorate
+    @q = Order.search(params[:q])
+    @orders = @q.result.decorate
   end
 
   # GET /orders/1
