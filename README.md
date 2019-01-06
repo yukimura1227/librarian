@@ -40,6 +40,12 @@ heroku buildpacks
 # rubyがない場合は、以下のコマンドで追加する
 # heroku buildpacks:add --index 2 heroku/ruby
 heroku addons:add heroku-postgresql
+
+heroku config:set 環境変数名=セットしたい値
+heroku config:set GOOGLE_APP_ID=aaaa
+heroku config:set GOOGLE_APP_SECRET=bbbb
+heroku config:set SLACK_WEBHOOK_URL=cccc
+heroku config:set SLACK_NOTIFY_TO=dddd
 ```
 
 ```
