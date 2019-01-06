@@ -8,12 +8,15 @@
 
   .uk-width-1-3
     .uk-form-controls.uk-inline
-      = f.collection_check_boxes :user_id_in, [[current_user.id, '自分が注文したもので絞る']], :first, :last
+      = f.collection_check_boxes :user_id_in, [[current_user.id, '自分が注文したもので絞る']], :first, :last do |b|
+        = b.label class: 'uk-form-label' do
+          = b.check_box class: 'uk-checkbox'
+          = b.text
 
   .uk-width-1-3
     = f.label :state_eq, '注文状況で絞る', class: 'uk-form-label'
     .uk-form-controls.uk-inline
-      = f.select :state_eq, Order.states_i18n.invert, include_blank: true
+      = f.select :state_eq, Order.states_i18n.invert, { include_blank: true }, class: 'uk-select'
 
 %table.uk-table.uk-table-divider.uk-table-striped.uk-table-hover.uk-table-small.uk-table-middle
   %thead
