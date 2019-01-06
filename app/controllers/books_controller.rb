@@ -5,7 +5,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all.includes(:order).includes(:user)
+    @q = Book.search(params[:q])
+    @books = @q.result.includes(:order).includes(:user)
   end
 
   # GET /books/1/edit
