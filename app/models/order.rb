@@ -27,6 +27,8 @@ class Order < ApplicationRecord
     img_wrap = elements.search('#img-canvas')
     @parsed_image_path = img_wrap.search('img').first[:src]
     @parsed_html = elements.to_html
+    self.origin_html = @parsed_html
+    self.image_path = @parsed_image_path
     elements
   end
 
