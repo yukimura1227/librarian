@@ -24,6 +24,8 @@ GOOGLE_APP_SECRET
 SLACK_WEBHOOK_URL
 # attention name on slack
 SLACK_NOTIFY_TO
+# login allow domain. ex) gmail.com,example.com
+LOGIN_ALLOW_DOMAIN_CSV
 ```
 
 ## Deploy to heroku
@@ -46,6 +48,7 @@ heroku config:set GOOGLE_APP_ID=aaaa
 heroku config:set GOOGLE_APP_SECRET=bbbb
 heroku config:set SLACK_WEBHOOK_URL=cccc
 heroku config:set SLACK_NOTIFY_TO=dddd
+heroku config:set LOGIN_ALLOW_DOMAIN_CSV=eeee
 ```
 
 ```
