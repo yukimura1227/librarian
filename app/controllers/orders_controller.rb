@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @q = Order.search(params[:q])
-    @orders = @q.result.decorate
+    @orders = @q.result.includes(:user).decorate
   end
 
   # GET /orders/1
