@@ -5,9 +5,9 @@
     %tr
       %th.uk-width-xlarge Title
       %th Order time
-      %th State
-      %th Order by
-      %th Image
+      %th.uk-text-center State
+      %th.uk-text-center Order by
+      %th.uk-text-center Image
       %th
 
   %tbody
@@ -16,9 +16,9 @@
         %td.uk-table-link.uk-text-break
           = link_to order.title, order.url
         %td= l order.order_time, format: :short
-        %td= order.state_i18n
-        %td= order.user.name
-        %td
+        %td.uk-text-center= order.state_i18n
+        %td.uk-text-center= order.user.name
+        %td.uk-text-center
           - if order.image_path.present?
             = image_tag order.image_path, size: '55x70'
         %td

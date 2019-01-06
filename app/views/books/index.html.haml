@@ -5,7 +5,7 @@
     %tr
       %th.uk-width-xlarge  Title
       %th  Location
-      %th Image
+      %th.uk-text-center Image
       %th  rentaled by
       %th
 
@@ -14,7 +14,7 @@
       %tr
         %td= book.title
         %td= book.location
-        %td
+        %td.uk-text-center
           - if book.order.image_path
             = image_tag book.order.image_path, size: '55x70'
         %td
