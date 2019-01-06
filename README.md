@@ -39,6 +39,7 @@ heroku buildpacks
 
 # rubyがない場合は、以下のコマンドで追加する
 # heroku buildpacks:add --index 2 heroku/ruby
+heroku addons:add heroku-postgresql
 ```
 
 ```
