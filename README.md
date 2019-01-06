@@ -25,3 +25,25 @@ SLACK_WEBHOOK_URL
 # attention name on slack
 SLACK_NOTIFY_TO
 ```
+
+## Deploy to heroku
+
+```
+# heroku first setup
+heroku login
+heroku git:remote -a libralian
+heroku buildpacks:add --index 1 heroku/nodejs # for yarn
+
+# 下記コマンドで、heroku/nodejsとheroku/rubyがこの順で表示されればOK
+heroku buildpacks
+
+# rubyがない場合は、以下のコマンドで追加する
+# heroku buildpacks:add --index 2 heroku/ruby
+```
+
+```
+# login heroku user for deploy
+heroku login
+git push heroku master
+heroku run rails db:migrate # if you change migration
+```
