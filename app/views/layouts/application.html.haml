@@ -39,10 +39,8 @@
               - else
                 = link_to "Logout", destroy_user_session_path, method: :delete, class: 'uk-link-reset'
 
-    .container
-      .row
-        .col-lg-12
-          = bootstrap_flash
-          = yield
+    .uk-container.uk-container-large
+      = bootstrap_flash
+      = yield
       %footer
         %p &copy; Company 2018
