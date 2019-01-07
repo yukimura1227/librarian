@@ -33,7 +33,7 @@
       .uk-navbar-right
         %ul.uk-navbar-nav
           %li
-            %button.uk-button.uk-button-default
+            %span.uk-button.uk-button-default
               - unless user_signed_in?
                 = link_to "Login", user_google_oauth2_omniauth_authorize_path, class: 'uk-link-reset'
               - else
