@@ -39,10 +39,10 @@ class Order < ApplicationRecord
     return if Rails.application.config.slack_webhook_url.blank?
     notifier = Slack::Notifier.new(Rails.application.config.slack_webhook_url)
     message = <<~"MESSAGE"
-      @#{notify_to} 「#{title}」の注文依頼がありました。
+      To: @#{notify_to} @#{user.slack_name}から「#{title}」の注文依頼がありました。
       #{url}
     MESSAGE
-    notifier.ping(message, parse: "full")
+    notifier.ping(message, parse: 'full')
   end
 
   def notify_to
