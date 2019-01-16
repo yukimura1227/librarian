@@ -53,3 +53,4 @@
             .uk-margin-small
             = link_to '注文取消', order, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }
 
+= paginate @orders
