@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_152011) do
+ActiveRecord::Schema.define(version: 2019_01_17_000800) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2019_01_04_152011) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_books_on_order_id"
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "operations", force: :cascade do |t|
@@ -27,6 +29,8 @@ ActiveRecord::Schema.define(version: 2019_01_04_152011) do
     t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_operations_on_book_id"
+    t.index ["user_id"], name: "index_operations_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -39,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_152011) do
     t.text "image_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
