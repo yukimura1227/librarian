@@ -15,6 +15,10 @@ class Order < ApplicationRecord
     order_purchase_waiting.where('order_time < ?', reference_date)
   }
 
+  def self.urge_to_purchased
+    wait_for_purchase_a_long_time.each(&:notify_slack_urge_to_purchased)
+  end
+
   def purchase
     create_book(
       title: title
@@ -48,8 +52,17 @@ class Order < ApplicationRecord
     notify_slack message
   end
 
+  def notify_slack_urge_to_purchased
+    message = <<~"MESSAGE"
+      To: @#{user.slack_name} 「#{title}」の購入は完了していますか？完了している場合は、購入済みにしてください。
+      #{url}
+    MESSAGE
+    notify_slack message
+  end
+
   def notify_slack(message)
     return if Rails.application.config.slack_webhook_url.blank?
+
     notifier = Slack::Notifier.new(Rails.application.config.slack_webhook_url)
     notifier.ping(message, parse: 'full')
   end
