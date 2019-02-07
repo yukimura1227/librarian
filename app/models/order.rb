@@ -41,6 +41,16 @@ class Order < ApplicationRecord
     elements
   end
 
+  protected
+
+  def notify_slack_urge_to_purchased
+    message = <<~"MESSAGE"
+      To: @#{user.slack_name} 「#{title}」の購入は完了していますか？完了している場合は、購入済みにしてください。
+      #{url}
+    MESSAGE
+    notify_slack message
+  end
+
   private
 
   def notify_slack_ordered
@@ -49,14 +59,6 @@ class Order < ApplicationRecord
       #{url}
     MESSAGE
 
-    notify_slack message
-  end
-
-  def notify_slack_urge_to_purchased
-    message = <<~"MESSAGE"
-      To: @#{user.slack_name} 「#{title}」の購入は完了していますか？完了している場合は、購入済みにしてください。
-      #{url}
-    MESSAGE
     notify_slack message
   end
 
