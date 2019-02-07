@@ -6,10 +6,18 @@ class Order < ApplicationRecord
 
   attr_reader :parsed_title, :parsed_image_path, :parsed_html
 
-  after_create :notify_slack
+  after_create :notify_slack_ordered
 
   validates :title, presence: true
   validates :url, presence: true
+
+  scope :wait_for_purchase_a_long_time, ->(reference_date: 7.days.ago.beginning_of_day) {
+    order_purchase_waiting.where('order_time < ?', reference_date)
+  }
+
+  def self.urge_to_purchased
+    wait_for_purchase_a_long_time.each(&:notify_slack_urge_to_purchased)
+  end
 
   def purchase
     create_book(
@@ -35,13 +43,27 @@ class Order < ApplicationRecord
 
   private
 
-  def notify_slack
-    return if Rails.application.config.slack_webhook_url.blank?
-    notifier = Slack::Notifier.new(Rails.application.config.slack_webhook_url)
+  def notify_slack_ordered
     message = <<~"MESSAGE"
       To: @#{notify_to} @#{user.slack_name}から「#{title}」の注文依頼がありました。
       #{url}
     MESSAGE
+
+    notify_slack message
+  end
+
+  def notify_slack_urge_to_purchased
+    message = <<~"MESSAGE"
+      To: @#{user.slack_name} 「#{title}」の購入は完了していますか？完了している場合は、購入済みにしてください。
+      #{url}
+    MESSAGE
+    notify_slack message
+  end
+
+  def notify_slack(message)
+    return if Rails.application.config.slack_webhook_url.blank?
+
+    notifier = Slack::Notifier.new(Rails.application.config.slack_webhook_url)
     notifier.ping(message, parse: 'full')
   end
 
