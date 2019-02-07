@@ -11,6 +11,10 @@ class Order < ApplicationRecord
   validates :title, presence: true
   validates :url, presence: true
 
+  scope :wait_for_purchase_a_long_time, ->(reference_date: 7.days.ago.beginning_of_day) {
+    order_purchase_waiting.where('order_time < ?', reference_date)
+  }
+
   def purchase
     create_book(
       title: title
