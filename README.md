@@ -51,6 +51,7 @@ heroku config:set SLACK_WEBHOOK_URL=cccc
 heroku config:set SLACK_NOTIFY_TO=dddd
 heroku config:set LOGIN_ALLOW_DOMAIN_CSV=eeee
 heroku config:add TZ=Asia/Tokyo
+heroku config:add APPLICATION_DOMAIN=https://xxxxxxxxx
 ```
 
 ```

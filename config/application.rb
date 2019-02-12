@@ -32,5 +32,6 @@ module Librarian
 
     config.slack_webhook_url = ENV['SLACK_WEBHOOK_URL']
     config.slack_notify_to = ENV['SLACK_NOTIFY_TO']
+    config.application_domain = ENV['APPLICATION_DOMAIN']
   end
 end
