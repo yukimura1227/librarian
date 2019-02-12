@@ -43,8 +43,8 @@ class Order < ApplicationRecord
 
   def notify_slack_urge_to_purchased
     message = <<~"MESSAGE"
-      To: @#{user.slack_name} 「#{title}」の購入は完了していますか？完了している場合は、購入済みにしてください。
-      #{url}
+      To: @#{user&.slack_name} 「#{title}」の購入は完了していますか？完了している場合は、購入済みにしてください。
+      #{Rails.application.config.application_domain}/#{Rails.application.routes.url_helpers.orders_path(q: { state_eq: 0 })}
     MESSAGE
     notify_slack message
   end
