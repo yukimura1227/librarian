@@ -31,7 +31,8 @@ class OrdersController < ApplicationController
     @order.user = current_user
 
     respond_to do |format|
-      if @order.save
+      validation_context = params[:ignore_title_unique_validation] == false.to_s ? :check_title_unique : nil
+      if @order.save(context: validation_context)
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else

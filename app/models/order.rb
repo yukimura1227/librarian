@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   after_create :notify_slack_ordered
 
   validates :title, presence: true
+  validates :title, uniqueness: true, on: :check_title_unique
   validates :url, presence: true
 
   scope :wait_for_purchase_a_long_time, ->(reference_date: 7.days.ago.beginning_of_day) {
