@@ -28,4 +28,25 @@ RSpec.describe Order, type: :model do
       expect { purchase }.to change { Book.count }.by(1)
     end
   end
+
+  describe '#title_duplicated?' do
+    subject { order.title_duplicated? }
+
+    context 'when orderがvalidな場合' do
+      let(:order) { build(:order) }
+
+      it { is_expected.to eq false }
+    end
+    context 'when orderがinvalidだが、titleについてはvalidな場合' do
+      let(:order) { build(:order, url: nil) }
+
+      it { is_expected.to eq false }
+    end
+    context 'when 重複するタイトルが存在する場合' do
+      let(:order) { build(:order) }
+      let!(:same_title_order) { create(:order, title: order.title) }
+
+      it { is_expected.to eq true }
+    end
+  end
 end

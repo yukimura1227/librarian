@@ -49,6 +49,13 @@ class Order < ApplicationRecord
     notify_slack message
   end
 
+  def title_duplicated?
+    return false if valid?(:check_title_unique)
+    return false unless errors.include?(:title)
+
+    errors.details[:title].map { |v| v[:error] }.include?(:taken)
+  end
+
   private
 
   def notify_slack_ordered
