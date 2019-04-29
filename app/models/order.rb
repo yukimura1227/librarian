@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   after_create :notify_slack_ordered
 
   validates :title, presence: true
+  validates :title, uniqueness: true, on: :check_title_unique
   validates :url, presence: true
 
   scope :wait_for_purchase_a_long_time, ->(reference_date: 7.days.ago.beginning_of_day) {
@@ -47,6 +48,13 @@ class Order < ApplicationRecord
       #{Rails.application.config.application_domain}/#{Rails.application.routes.url_helpers.orders_path(q: { state_eq: 0 })}
     MESSAGE
     notify_slack message
+  end
+
+  def title_duplicated?
+    return false if valid?(:check_title_unique)
+    return false unless errors.include?(:title)
+
+    errors.details[:title].map { |v| v[:error] }.include?(:taken)
   end
 
   private
