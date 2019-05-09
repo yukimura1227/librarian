@@ -45,6 +45,8 @@
           .uk-margin-small
           - if book.rentaled_by?(current_user)
             = link_to '返す', return_book_path(book), method: :post
+            .uk-margin-small
+            = link_to '延長する', rental_book_path(book), method: :post
           - else
             = link_to '借りる', rental_book_path(book), method: :post
 
