@@ -10,7 +10,7 @@ class Book < ApplicationRecord
   }
 
   def self.prompt_for_return
-    rentaled.select(:rented_for_a_long_time?).each(&:notify_slack_prompt_for_return)
+    rentaled.select(&:rented_for_a_long_time?).each(&:notify_slack_prompt_for_return)
   end
 
   def rented_for_a_long_time?
