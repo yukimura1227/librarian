@@ -29,11 +29,14 @@ class BooksController < ApplicationController
 
   def rental
     @book.user = current_user
-    if @book.save
-      current_user.rental_operations.create(book: @book)
-      redirect_to books_path, notice: "#{@book.title}を借りました。"
-    else
-      redirect_to books_path, alert: "「#{@book.title}」を借りるのに失敗しました。"
+    respond_to do |format|
+      if @book.save
+        current_user.rental_operations.create(book: @book)
+        format.js { render :rental}
+        format.html { redirect_to books_path, notice: "#{@book.title}を借りました。" }
+      else
+        redirect_to books_path, alert: "「#{@book.title}」を借りるのに失敗しました。"
+      end
     end
   end
 
@@ -52,6 +55,7 @@ class BooksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params[:id])
+    @book = @book.decorate
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
