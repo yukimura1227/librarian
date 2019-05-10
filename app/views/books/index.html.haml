@@ -27,7 +27,7 @@
       %th
 
   %tbody
-    - @books.each do |book|
+    - @books.decorate.each do |book|
       %tr
         %td= book.title
         %td= book.location
@@ -38,15 +38,15 @@
         %td
           - if book.rentaled?
             = book.user.email
-            %br/
-            = "レンタル日時：#{ l(book.last_rental_operation.created_at, format: :short)}"
+            %div{ id: "js-rental_datetime-#{book.id}" }
+              = book.last_rental_at
         %td
           = link_to '編集', edit_book_path(book)
           .uk-margin-small
           - if book.rentaled_by?(current_user)
             = link_to '返す', return_book_path(book), method: :post
             .uk-margin-small
-            = link_to '延長する', rental_book_path(book), method: :post
+            = link_to '延長する', rental_book_path(book), method: :post, remote: true
           - else
             = link_to '借りる', rental_book_path(book), method: :post
 
