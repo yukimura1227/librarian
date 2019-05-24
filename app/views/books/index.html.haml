@@ -48,6 +48,9 @@
             .uk-margin-small
             = link_to '延長する', rental_book_path(book), method: :post, remote: true
           - else
-            = link_to '借りる', rental_book_path(book), method: :post
+            = link_to '借りる', rental_book_path(book), method: :post, data: { confirm: '本当に借りてよろしいですか？' }
+            - if book.rentaled?
+              .uk-margin-small
+              = link_to '読みたい！！', want_to_read_book_path(book), method: :post, data: { confirm: '読みたいリクエストを送りますか？' }, remote: true
 
 = paginate @books
