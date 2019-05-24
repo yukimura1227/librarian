@@ -1,6 +1,6 @@
 # controller for books
 class BooksController < ApplicationController
-  before_action :set_book, only: [:edit, :update, :rental, :return]
+  before_action :set_book, only: [:edit, :update, :rental, :want_to_read, :return]
 
   # GET /books
   # GET /books.json
@@ -37,6 +37,13 @@ class BooksController < ApplicationController
       else
         redirect_to books_path, alert: "「#{@book.title}」を借りるのに失敗しました。"
       end
+    end
+  end
+
+  def want_to_read
+    @book.notify_slack_for_want_to_rent(current_user)
+    respond_to do |format|
+      format.js { render :want_to_read }
     end
   end
 
