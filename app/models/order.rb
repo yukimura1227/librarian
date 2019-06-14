@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # for order
 class Order < ApplicationRecord
   belongs_to :user
