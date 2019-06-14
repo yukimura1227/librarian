@@ -2,6 +2,7 @@
 
 # for order
 class Order < ApplicationRecord
+  USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'.freeze
   belongs_to :user
   has_one :book
   enum state: { order_purchase_waiting: 0, order_purchased: 10 }
@@ -32,7 +33,7 @@ class Order < ApplicationRecord
   def extract_amazon_product_info!(target_url = nil)
     target_url = target_url.presence || url
     agent = Mechanize.new
-    agent.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    agent.user_agent = USER_AGENT
     page = agent.get(target_url)
     elements = page.search('#dp-container')
     if elements.search('#productTitle').present?
