@@ -40,7 +40,7 @@ class Order < ApplicationRecord
       @parsed_title = elements.search('#productTitle')&.inner_text
       img_wrap = elements.search('#img-canvas')
     else
-      @parsed_title = elements.search('#ebooksProductTitle')&.inner_text
+      @parsed_title = elements.search('#ebooksProductTitle')&.inner_text.strip
       img_wrap = elements.search('#ebooks-img-canvas')
     end
     @parsed_image_path = img_wrap.search('img').first[:src]
