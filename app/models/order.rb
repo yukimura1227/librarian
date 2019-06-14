@@ -33,8 +33,13 @@ class Order < ApplicationRecord
     agent.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
     page = agent.get(target_url)
     elements = page.search('#dp-container')
-    @parsed_title = elements.search('#productTitle')&.inner_text || elements.search('#ebooksProductTitle')&.inner_text
-    img_wrap = elements.search('#img-canvas') || elements.search('#ebooks-img-canvas')
+    if elements.search('#productTitle').present?
+      @parsed_title = elements.search('#productTitle')&.inner_text
+      img_wrap = elements.search('#img-canvas')
+    else
+      @parsed_title = elements.search('#ebooksProductTitle')&.inner_text
+      img_wrap = elements.search('#ebooks-img-canvas')
+    end
     @parsed_image_path = img_wrap.search('img').first[:src]
     @parsed_html = elements.to_html
     self.origin_html = @parsed_html
