@@ -49,6 +49,7 @@ heroku config:set GOOGLE_APP_ID=aaaa
 heroku config:set GOOGLE_APP_SECRET=bbbb
 heroku config:set SLACK_WEBHOOK_URL=cccc
 heroku config:set SLACK_NOTIFY_TO=dddd
+heroku config:add SLACK_ACCESS_TOKEN=xoxp-xxxxxxxxxx
 heroku config:set LOGIN_ALLOW_DOMAIN_CSV=eeee
 heroku config:add TZ=Asia/Tokyo
 heroku config:add APPLICATION_DOMAIN=https://xxxxxxxxx
