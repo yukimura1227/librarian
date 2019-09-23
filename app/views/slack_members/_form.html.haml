@@ -1,19 +1,20 @@
-= form_for @slack_member do |f|
-  - if @slack_member.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@slack_member.errors.count, "error")} prohibited this slack_member from being saved:"
-      %ul
-        - @slack_member.errors.full_messages.each do |message|
-          %li= message
-
-  .field
-    = f.label :slack_id
-    = f.text_field :slack_id
-  .field
-    = f.label :slack_user_name
-    = f.text_field :slack_user_name
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .actions
-    = f.submit 'Save'
+= form_for @slack_member, html: { class: "form form-horizontal slack_member" } do |f|
+  .form-group
+    = f.label :slack_id, class: 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :slack_id, class: 'form-control', required: true
+    = f.error_span(:slack_id)
+  .form-group
+    = f.label :slack_user_name, class: 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :slack_user_name, class: 'form-control', required: true
+    = f.error_span(:slack_user_name)
+  .form-group
+    = f.label :user_id, class: 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :user_id, class: 'form-control', required: true
+    = f.error_span(:user_id)
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit nil,class: 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), slack_members_path, :class => 'btn btn-default'
