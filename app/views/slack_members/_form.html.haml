@@ -1,0 +1,19 @@
+= form_for @slack_member do |f|
+  - if @slack_member.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@slack_member.errors.count, "error")} prohibited this slack_member from being saved:"
+      %ul
+        - @slack_member.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :slack_id
+    = f.text_field :slack_id
+  .field
+    = f.label :slack_user_name
+    = f.text_field :slack_user_name
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .actions
+    = f.submit 'Save'

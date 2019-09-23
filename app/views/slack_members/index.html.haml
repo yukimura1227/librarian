@@ -1,0 +1,21 @@
+%h1 Listing slack_members
+
+%table
+  %thead
+    %tr
+      %th Slack
+      %th Slack user name
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @slack_members.each do |slack_member|
+      %tr
+        %td= slack_member.slack_id
+        %td= slack_member.slack_user_name
+        %td= slack_member.user_id
+        %td= link_to 'Edit', edit_slack_member_path(slack_member)
+        %td= link_to 'Destroy', slack_member, method: :delete, data: { confirm: 'Are you sure?' }
+
