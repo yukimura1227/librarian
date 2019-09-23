@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
     subject { user.slack_name }
 
     it 'take name from eamil' do
-      is_expected.to eq "@#{slack_member.slack_id}"
+      is_expected.to eq "<@#{slack_member.slack_id}>"
     end
   end
 end
