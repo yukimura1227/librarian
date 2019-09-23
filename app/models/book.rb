@@ -29,14 +29,14 @@ class Book < ApplicationRecord
 
   def notify_slack_for_want_to_rent(request_user)
     message = <<~"MESSAGE"
-      To: @#{user&.slack_name} 「#{title}」を、@#{request_user.slack_name}が読みたいようですよ？？
+      To: #{user&.slack_name} 「#{title}」を、#{request_user.slack_name}が読みたいようですよ？？
     MESSAGE
     notify_slack message
   end
 
   def notify_slack_prompt_for_return
     message = <<~"MESSAGE"
-      To: @#{user&.slack_name} 「#{title}」は、まだ借りていますか？返却済みの場合は、「返す」処理をしてください。まだ借りている場合は、「延長する」処理をしてください。
+      To: #{user&.slack_name} 「#{title}」は、まだ借りていますか？返却済みの場合は、「返す」処理をしてください。まだ借りている場合は、「延長する」処理をしてください。
       #{Rails.application.config.application_domain}/#{Rails.application.routes.url_helpers.books_path(q: { id_eq: id })}
     MESSAGE
     notify_slack message

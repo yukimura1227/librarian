@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :slack_members, only: %i(index edit update destroy)
   resources :books, only: %i(index edit update) do
     member do
       post :rental
