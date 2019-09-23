@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :rental_operations, class_name: 'Operation::Rental'
   has_many :return_operations, class_name: 'Operation::Return'
 
+  has_one :slack_member
+
   def self.find_for_google(auth)
     user = User.find_by(email: auth.info.email)
 
