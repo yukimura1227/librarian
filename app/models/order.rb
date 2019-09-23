@@ -69,7 +69,7 @@ class Order < ApplicationRecord
 
   def notify_slack_ordered
     message = <<~"MESSAGE"
-      To: #{notify_to} #{user.slack_name}から「#{title}」の注文依頼がありました。
+      To: #{notify_to} #{user&.slack_name}から「#{title}」の注文依頼がありました。
       #{url}
     MESSAGE
 
