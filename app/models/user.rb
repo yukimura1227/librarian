@@ -33,6 +33,6 @@ class User < ActiveRecord::Base
   private_class_method :create_user_by_google
 
   def slack_name
-    email.gsub(/@.*/, '')
+    "@#{slack_member.slack_id}"
   end
 end
