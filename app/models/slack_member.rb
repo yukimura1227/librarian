@@ -1,0 +1,2 @@
+class SlackMember < ApplicationRecord
+end
