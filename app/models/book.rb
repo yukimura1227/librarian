@@ -1,5 +1,6 @@
 # model for books
 class Book < ApplicationRecord
+  include Utility::Slack
   RENTAL_LIMIT_DAYS = 30
   belongs_to :order
   belongs_to :user, optional: true
@@ -48,14 +49,4 @@ class Book < ApplicationRecord
 
     errors.details[:title].map { |v| v[:error] }.include?(:taken)
   end
-
-  private
-
-  def notify_slack(message)
-    return if Rails.application.config.slack_webhook_url.blank?
-
-    notifier = Slack::Notifier.new(Rails.application.config.slack_webhook_url)
-    notifier.ping(message, parse: 'full')
-  end
-
 end

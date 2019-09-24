@@ -2,6 +2,7 @@
 
 # for order
 class Order < ApplicationRecord
+  include Utility::Slack
   USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'.freeze
   belongs_to :user
   has_one :book
@@ -74,13 +75,6 @@ class Order < ApplicationRecord
     MESSAGE
 
     notify_slack message
-  end
-
-  def notify_slack(message)
-    return if Rails.application.config.slack_webhook_url.blank?
-
-    notifier = Slack::Notifier.new(Rails.application.config.slack_webhook_url)
-    notifier.ping(message, parse: 'full')
   end
 
   def notify_to
