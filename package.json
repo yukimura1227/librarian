@@ -2,6 +2,10 @@
   "name": "librarian",
   "private": true,
   "dependencies": {
+    "@rails/webpacker": "4.2.2",
     "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.1"
   }
 }
