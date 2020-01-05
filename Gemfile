@@ -112,3 +112,5 @@ gem 'slack-notifier'
 gem 'slack-api'
 gem 'puma_worker_killer'
 gem 'kaminari'
+
+gem 'webpacker'
