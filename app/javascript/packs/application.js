@@ -19,3 +19,8 @@ console.log('Hello World from Webpacker')
 
 import 'uikit/dist/css/uikit'
 import 'uikit/dist/js/uikit'
+
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+import '@fortawesome/fontawesome-free/js/regular';
+
