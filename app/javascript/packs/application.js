@@ -16,3 +16,6 @@
 // const imagePath = (name) => images(name, true)
 
 console.log('Hello World from Webpacker')
+
+import 'uikit/dist/css/uikit'
+import 'uikit/dist/js/uikit'
