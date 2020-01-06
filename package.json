@@ -2,6 +2,12 @@
   "name": "librarian",
   "private": true,
   "dependencies": {
-    "jquery": "^3.3.1"
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "@rails/webpacker": "4.2.2",
+    "jquery": "^3.3.1",
+    "uikit": "^3.2.6"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.1"
   }
 }
