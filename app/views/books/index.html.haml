@@ -25,6 +25,7 @@
       %th.uk-text-center Image
       %th  rentaled by
       %th
+      %th rental count
 
   %tbody
     - @books.decorate.each do |book|
@@ -52,5 +53,7 @@
             - if book.rentaled?
               .uk-margin-small
               = link_to '読みたい！！', want_to_read_book_path(book), method: :post, data: { confirm: '読みたいリクエストを送りますか？' }, remote: true
+        %td
+          = book.rental_operations.count
 
 = paginate @books
