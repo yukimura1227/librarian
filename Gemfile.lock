@@ -420,7 +420,7 @@ GEM
       faraday_middleware (~> 0.10.0)
       faye-websocket (~> 0.10.6)
       multi_json (~> 1.0, >= 1.0.3)
-    slack-notifier (2.3.2)
+    slack-notifier (2.4.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
