@@ -104,7 +104,7 @@ gem 'omniauth-google-oauth2'
 gem 'rails-i18n'
 gem 'ransack'
 gem 'slack-notifier'
-gem 'slack-api'
+gem 'slack-ruby-client'
 gem 'puma_worker_killer'
 gem 'kaminari'
 
