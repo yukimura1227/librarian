@@ -60,7 +60,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
-gem 'draper', '>= 3.0.0.pre1'
 gem 'font-awesome-rails'
 group :development, :test do
   gem 'pry-rails'

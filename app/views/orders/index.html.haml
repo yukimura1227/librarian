@@ -33,7 +33,7 @@
       %th
 
   %tbody
-    - @orders.decorate.each do |order|
+    - @orders.each do |order|
       %tr
         %td.uk-table-link.uk-text-break
           = link_to order.title, order.url
