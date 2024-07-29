@@ -39,10 +39,10 @@ class Order < ApplicationRecord
     elements = page.search('#dp-container')
     if elements.search('#productTitle').present?
       @parsed_title = elements.search('#productTitle')&.inner_text
-      img_wrap = elements.search('#img-canvas')
+      img_wrap = elements.search('#landingImage')
     else
       @parsed_title = elements.search('#ebooksProductTitle')&.inner_text.strip
-      img_wrap = elements.search('#ebooks-img-canvas')
+      img_wrap = elements.search('#landingImage')
     end
     @parsed_image_path = img_wrap.search('img').first[:src]
     @parsed_html = elements.to_html
