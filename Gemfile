@@ -62,11 +62,7 @@ gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
 gem 'font-awesome-rails'
 group :development, :test do
-  gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-byebug'
   gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'awesome_print'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
@@ -81,7 +77,6 @@ group :development do
   gem 'pry-coolline'
   gem 'rubocop', require: false
   gem 'view_source_map'
-  gem 'bullet'
 end
 
 group :test do
