@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @q = Order.order(id: :desc).search(params[:q])
+    @q = Order.order(id: :desc).ransack(params[:q])
     @orders = @q.result.includes(:user).page(params[:page]).per(20)
   end
 
