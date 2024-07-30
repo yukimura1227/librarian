@@ -76,7 +76,6 @@ group :development do
   gem 'hirb-unicode'
   gem 'pry-coolline'
   gem 'rubocop', require: false
-  gem 'view_source_map'
 end
 
 group :test do
