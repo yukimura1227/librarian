@@ -53,6 +53,7 @@ heroku config:add SLACK_ACCESS_TOKEN=xoxp-xxxxxxxxxx
 heroku config:set LOGIN_ALLOW_DOMAIN_CSV=eeee
 heroku config:add TZ=Asia/Tokyo
 heroku config:add APPLICATION_DOMAIN=https://xxxxxxxxx
+heroku config:set NODE_OPTIONS='--openssl-legacy-provider'
 ```
 ※SLACK_ACCESS_TOKENは、https://api.slack.com/appsからcreate appする必要があり、users.listのAPIを実行できる必要があります。
 
