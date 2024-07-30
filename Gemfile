@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.7'
+ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8.1'
+gem 'rails', '~> 6.0.6.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -38,7 +38,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3'
 end
 
 group :development do
@@ -60,14 +60,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
-gem 'draper', '>= 3.0.0.pre1'
 gem 'font-awesome-rails'
 group :development, :test do
-  gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-byebug'
   gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'awesome_print'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
@@ -81,8 +76,6 @@ group :development do
   gem 'hirb-unicode'
   gem 'pry-coolline'
   gem 'rubocop', require: false
-  gem 'view_source_map'
-  gem 'bullet'
 end
 
 group :test do
@@ -106,3 +99,4 @@ gem 'puma_worker_killer'
 gem 'kaminari'
 
 gem 'webpacker'
+gem 'psych', '~> 3.1'

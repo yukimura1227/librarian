@@ -66,6 +66,13 @@ class Order < ApplicationRecord
     errors.details[:title].map { |v| v[:error] }.include?(:taken)
   end
 
+  def allow_edit?(user)
+    return false if user.blank?
+    return false unless order_purchase_waiting?
+
+    user_id == user.id
+  end
+
   private
 
   def notify_slack_ordered
