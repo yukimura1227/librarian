@@ -100,3 +100,4 @@ gem 'puma_worker_killer'
 gem 'kaminari'
 
 gem 'webpacker'
+gem 'psych', '~> 3.1'
