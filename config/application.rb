@@ -8,30 +8,12 @@ Bundler.require(*Rails.groups)
 
 module Librarian
   class Application < Rails::Application
-    # generators settings
-        config.generators do |g|
-          g.test_framework :rspec,
-          fixtures: true,
-          view_specs: false,
-          helper_specs: false,
-          routing_specs: false,
-          controller_specs: true,
-          request_specs: false
-          g.fixture_replacement :factory_bot, dir: 'spec/factories'
-        end    # Initialize configuration defaults for originally generated Rails version.
+    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    I18n.config.available_locales = [:ja, :en]
-    I18n.default_locale = :ja
-    config.active_record.default_timezone = :local
-    config.time_zone = 'Tokyo'
-
-    config.slack_webhook_url  = ENV['SLACK_WEBHOOK_URL']
-    config.slack_notify_to    = ENV['SLACK_NOTIFY_TO']
-    config.application_domain = ENV['APPLICATION_DOMAIN']
   end
 end
