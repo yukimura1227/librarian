@@ -1,4 +1,4 @@
 replace_target_element = $('#js-rental_datetime-<%= @book.id %>');
 console.log(replace_target_element);
-replace_target_element.html('<%= @book.last_rental_at %>');
+replace_target_element.html('<%= "レンタル日時：#{l(@book.last_rental_operation.created_at, format: :short)}" %>');
 alert('<%= @book.title %>を延長しました');
