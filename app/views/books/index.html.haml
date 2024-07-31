@@ -40,7 +40,7 @@
           - if book.rentaled?
             = book.user.email
             %div{ id: "js-rental_datetime-#{book.id}" }
-              = book.last_rental_at
+              = "レンタル日時：#{l(book.last_rental_operation.created_at, format: :short)}"
         %td
           = link_to '編集', edit_book_path(book)
           .uk-margin-small
