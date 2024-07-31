@@ -6,7 +6,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result.includes(:order).includes(:user).order(id: desc).page(params[:page]).per(20)
+    @books = @q.result.includes(:order).includes(:user).order(id: :desc).page(params[:page]).per(20)
   end
 
   # GET /books/1/edit
