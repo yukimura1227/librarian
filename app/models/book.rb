@@ -6,6 +6,7 @@ class Book < ApplicationRecord
   belongs_to :user, optional: true
   has_one :last_rental_operation, -> { order(id: :desc) }, class_name: 'Operation::Rental'
   has_many :rental_operations, class_name: 'Operation::Rental'
+  accepts_nested_attributes_for :order
 
   scope :rentaled, -> {
     where.not(user_id: nil)

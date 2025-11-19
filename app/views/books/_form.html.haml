@@ -13,4 +13,9 @@
     = f.label :location, class: 'uk-form-label'
     = f.text_area :location, class: 'uk-input'
   .uk-margin
+    = f.fields_for :order do |of|
+      = of.hidden_field :id
+      = of.label :image_path, class: 'uk-form-label'
+      = of.text_field :image_path, class: 'uk-input'
+  .uk-margin
     = f.submit '編集する'
