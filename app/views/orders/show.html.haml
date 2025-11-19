@@ -9,8 +9,9 @@
 %p
   %b State:
   = @order.state
-%p
-  %b Url:
-  = @order.url
+- if @order.url.present?
+  %p
+    %b Url:
+    = @order.url
 
 = link_to '戻る', orders_path

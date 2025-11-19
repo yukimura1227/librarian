@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require 'cgi'
+require 'json'
+require 'net/http'
+
 # for order
 class Order < ApplicationRecord
   include Utility::Slack
-  USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'.freeze
   belongs_to :user
   has_one :book
   enum state: { order_purchase_waiting: 0, order_purchased: 10 }
@@ -14,7 +17,6 @@ class Order < ApplicationRecord
 
   validates :title, presence: true
   validates :title, uniqueness: true, on: :check_title_unique
-  validates :url, presence: true
 
   scope :wait_for_purchase_a_long_time, ->(reference_date: 7.days.ago.beginning_of_day) {
     order_purchase_waiting.where('order_time < ?', reference_date)
@@ -31,24 +33,22 @@ class Order < ApplicationRecord
     order_purchased!
   end
 
-  def extract_amazon_product_info!(target_url = nil)
-    target_url = target_url.presence || url
-    agent = Mechanize.new
-    agent.user_agent = USER_AGENT
-    page = agent.get(target_url)
-    elements = page.search('#dp-container')
-    if elements.search('#productTitle').present?
-      @parsed_title = elements.search('#productTitle')&.inner_text
-      img_wrap = elements.search('#landingImage')
-    else
-      @parsed_title = elements.search('#ebooksProductTitle')&.inner_text.strip
-      img_wrap = elements.search('#landingImage')
-    end
-    @parsed_image_path = img_wrap.search('img').first[:src]
-    @parsed_html = elements.to_html
+  def extract_amazon_product_info!(isbn = nil)
+    isbn = sanitized_isbn(isbn)
+    raise OpenbdError, 'ISBNを入力してください。' if isbn.blank?
+
+    response = fetch_openbd(isbn)
+    raise OpenbdError, 'openBDから情報を取得できませんでした。' if response.blank?
+
+    summary = response['summary'] || {}
+
+    @parsed_title = summary['title']
+    @parsed_image_path = summary['cover']
+    @parsed_html = nil
     self.origin_html = @parsed_html
     self.image_path = @parsed_image_path
-    elements
+
+    response
   end
 
   def notify_slack_urge_to_purchased
@@ -87,4 +87,21 @@ class Order < ApplicationRecord
   def notify_to
     "@#{Rails.application.config.slack_notify_to}" || '@here'
   end
+
+  def sanitized_isbn(isbn)
+    isbn.to_s.delete('-').strip
+  end
+
+  def fetch_openbd(isbn)
+    uri = URI.parse("https://api.openbd.jp/v1/get?isbn=#{CGI.escape(isbn)}")
+    res = Net::HTTP.get_response(uri)
+    raise OpenbdError, 'openBDへのリクエストに失敗しました。' unless res.is_a?(Net::HTTPSuccess)
+
+    json = JSON.parse(res.body)
+    json&.first
+  rescue JSON::ParserError
+    raise OpenbdError, 'openBDのレスポンス解析に失敗しました。'
+  end
+
+  class OpenbdError < StandardError; end
 end

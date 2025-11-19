@@ -66,9 +66,15 @@ class OrdersController < ApplicationController
     end
   end
 
-  def extract_amazon_product_info
-    @order = Order.new(order_params)
-    @order.extract_amazon_product_info!
+  def extract_openbd_product_info
+    @order = Order.new
+
+    begin
+      @order.extract_amazon_product_info!(params[:isbn])
+      render :extract_openbd_product_info
+    rescue Order::OpenbdError => e
+      render json: { error: e.message }, status: :unprocessable_entity
+    end
   end
 
   def purchase

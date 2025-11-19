@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       post :purchase
     end
     collection do
-      get :extract_amazon_product_info
+      get :extract_openbd_product_info
     end
   end
   root to: 'top#index'

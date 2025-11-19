@@ -7,21 +7,20 @@
           %li= message
 
   .uk-margin
-    = f.label :url, class: 'uk-form-label'
+    = label_tag :isbn, 'ISBN', class: 'uk-form-label'
     .uk-form-controls
-      = f.text_field :url, class: 'uk-input js-input-url'
-      = f.hidden_field :origin_html, class: 'js-input-origin-html'
+      = text_field_tag :isbn, nil, class: 'uk-input js-input-isbn', placeholder: '978XXXXXXXXXX'
     .uk-form-controls
       .js-product-image
-    .uk-button.uk-button-default.uk-link-reset.js-extract-amazon-product-info{ data: { 'api-url': extract_amazon_product_info_orders_path}}
-      Amazonから情報を取得する
+    .uk-button.uk-button-default.uk-link-reset.js-extract-openbd-product-info{ data: { 'api-url': extract_openbd_product_info_orders_path}}
+      ISBNから情報を取得する
     :coffee
       $ () ->
-        $('.js-extract-amazon-product-info').on 'click', ->
+        $('.js-extract-openbd-product-info').on 'click', ->
           api_url = $(this).data('api-url')
-          amazon_url = $('.js-input-url').val()
-          if amazon_url  == ''
-            alert 'please input url!!'
+          isbn = $('.js-input-isbn').val()
+          if isbn == ''
+            alert 'please input isbn!!'
             return
 
           self = $(this)
@@ -31,17 +30,16 @@
             url: api_url
             type: 'get'
             data: {
-              "order[url]": $('.js-input-url').val()
+              isbn: isbn
             }
           ).done((data, textStatus, jqXHR) ->
             $('.js-input-title').val(data.title)
             $('.js-input-title').addClass('uk-disabled')
-            $('.js-input-origin-html').val(data.origin_html)
             $('.js-product-image').html("<img src='" + data.image_path + "'/>")
             $('.js-input-image-path').val(data.image_path)
             return
           ).fail((jqXHR, textStatus, errorThrown) ->
-            alert 'Error!!'
+            alert jqXHR.responseJSON?.error || 'Error!!'
             return
           ).always(() ->
             self.removeClass("uk-disabled")

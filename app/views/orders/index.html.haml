@@ -36,7 +36,10 @@
     - @orders.each do |order|
       %tr
         %td.uk-table-link.uk-text-break
-          = link_to order.title, order.url
+          - if order.url.present?
+            = link_to order.title, order.url
+          - else
+            = order.title
         %td= l order.order_time, format: :short
         %td.uk-text-center= order.state_i18n
         %td.uk-text-center= order.user.name
